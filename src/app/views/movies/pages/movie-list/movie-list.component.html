@@ -1,1 +1,14 @@
-<p>movie-list works!</p>
+<app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+<div class="movie-grid">
+  <app-movie-card
+    *ngFor="let movie of movies$ | async"
+    [movie]="movie">
+  </app-movie-card>
+</div>
+
+<mat-paginator
+  [length]="100"
+  [pageSize]="20"
+  (page)="onPageChange($event)">
+</mat-paginator>
