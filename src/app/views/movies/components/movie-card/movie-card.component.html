@@ -1,5 +1,30 @@
-<mat-card class="movie-card" [routerLink]="['/movies', movie.id]">
-  <!-- <img mat-card-image [src]="movie.poster_path | imagePath" alt="{{ movie.title }}" /> -->
-  <mat-card-title>{{ movie.title }}</mat-card-title>
-  <mat-card-subtitle>{{ movie.release_date }}</mat-card-subtitle>
+<mat-card class="movie-card">
+  <!-- Updated image handling -->
+  <img mat-card-image 
+       [src]="getPosterUrl()" 
+       [alt]="movie.title"
+       loading="lazy">
+
+  <!-- Rest of your template remains the same -->
+  <mat-card-header>
+    <mat-card-title>{{ movie.title || 'Untitled' }}</mat-card-title>
+    <mat-card-subtitle>
+      <span class="release-badge">{{ formatDate(movie.release_date) }}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ movie.overview || 'No description available' }}</p>
+    <mat-chip-listbox aria-label="Movie genres">
+      <mat-chip-option *ngFor="let genre of movie.genre_ids" [selectable]="false">
+        {{ getGenreName(genre) }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-icon-button color="primary" aria-label="Play movie">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </mat-card-actions>
 </mat-card>

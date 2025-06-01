@@ -1,15 +1,41 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy, Input } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.css'
+  styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent {
-@Output() search = new EventEmitter<string>();
+export class SearchBarComponent implements OnInit, OnDestroy {
+  @Output() search = new EventEmitter<string>();
+  @Input() isLoading = false;  // Receive loading state from parent
 
-  onInput(event: Event) {
-    const inputValue = (event.target as HTMLInputElement).value;
-    this.search.emit(inputValue); // ✅ Emits a string
+  searchQuery = '';
+  private searchSubject = new Subject<string>();
+  private subscription!: Subscription;
+
+  ngOnInit() {
+    this.subscription = this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      // Emit trimmed value, empty string for clearing search
+      this.search.emit(value.trim());
+    });
+  }
+
+  onInput() {
+    this.searchSubject.next(this.searchQuery);
+  }
+
+  onSearchClick() {
+    if (this.searchQuery.trim()) {
+      this.search.emit(this.searchQuery.trim());
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

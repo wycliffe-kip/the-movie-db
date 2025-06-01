@@ -1,14 +1,27 @@
-<app-search-bar (search)="onSearch($event)"></app-search-bar>
+<app-search-bar
+  [isLoading]="(isLoading$ | async) ?? false"
+  (search)="onSearch($event)">
+</app-search-bar>
 
-<div class="movie-grid">
-  <app-movie-card
-    *ngFor="let movie of movies$ | async"
+
+
+<mat-spinner *ngIf="isLoading$ | async" diameter="50"></mat-spinner>
+
+<div *ngIf="!(isLoading$ | async)" class="movie-grid">
+  <app-movie-card 
+    *ngFor="let movie of movies$ | async" 
     [movie]="movie">
   </app-movie-card>
+  
+  <div *ngIf="(movies$ | async)?.length === 0" class="no-results">
+    {{ query ? 'No movies found. Try a different search.' : 'Loading popular movies...' }}
+  </div>
 </div>
 
 <mat-paginator
-  [length]="100"
+  *ngIf="(totalResults$ | async) ?? 0 > 0"
+  [length]="(totalResults$ | async) ?? 0"
   [pageSize]="20"
+  [pageIndex]="currentPage - 1"
   (page)="onPageChange($event)">
 </mat-paginator>
