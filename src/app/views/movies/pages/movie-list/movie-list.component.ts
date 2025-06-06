@@ -52,4 +52,8 @@ export class MovieListComponent implements OnInit {
     autoFocus: false
     });
   }
+
+  loadCategory(category: 'popular' | 'top_rated' | 'now_playing' | 'upcoming' | 'trending') {
+  this.movieService.fetchMoviesByCategory(category);
+}
 }

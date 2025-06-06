@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 
 // Firebase Modular SDK initialized in firebase.init.ts
 import '../firebase.init';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,9 @@ import '../firebase.init';
     MatInputModule,
     MatCardModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    provideAnimationsAsync()
+  ]
 })
 export class AppModule { }

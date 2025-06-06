@@ -23,7 +23,7 @@ import { MovieDetailComponent } from './pages/movie-detail/movie-detail.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailDialogWrapperComponent } from './components/movie-detail-dialog-wrapper/movie-detail-dialog-wrapper.component';
-
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @NgModule({
   declarations: [MovieListComponent, MovieCardComponent, 
     SearchBarComponent, PageLayoutComponent, NavigationComponent, 
@@ -37,6 +37,7 @@ import { MovieDetailDialogWrapperComponent } from './components/movie-detail-dia
     RouterModule,
     SharedModule,
     MoviesRoutingModule,
+    MatButtonToggleModule,
     MatIconModule,
     MatButtonModule,
 MatChipsModule, 

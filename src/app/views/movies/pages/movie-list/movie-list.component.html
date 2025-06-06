@@ -4,6 +4,14 @@
   (search)="onSearch($event)">
 </app-search-bar>
 
+<mat-button-toggle-group (change)="loadCategory($event.value)" value="popular">
+  <mat-button-toggle value="popular">Popular</mat-button-toggle>
+  <mat-button-toggle value="top_rated">Top Rated</mat-button-toggle>
+  <mat-button-toggle value="now_playing">Now Playing</mat-button-toggle>
+  <mat-button-toggle value="upcoming">Upcoming</mat-button-toggle>
+  <mat-button-toggle value="trending">Trending</mat-button-toggle>
+</mat-button-toggle-group>
+
 <mat-spinner *ngIf="isLoading$ | async" diameter="50"></mat-spinner>
 
 <div *ngIf="!(isLoading$ | async)" class="movie-grid">
