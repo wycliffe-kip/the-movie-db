@@ -15,9 +15,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { PageLayoutComponent } from './pages/page-layout/page-layout.component';
+import { NavigationComponent } from './pages/navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { FooterComponent } from './pages/footer/footer.component';
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
 
 @NgModule({
-  declarations: [MovieListComponent, MovieCardComponent, SearchBarComponent],
+  declarations: [MovieListComponent, MovieCardComponent, SearchBarComponent, PageLayoutComponent, NavigationComponent, FooterComponent,MovieDetailComponent],
   imports: [
     CommonModule,
     MatPaginatorModule,
@@ -31,7 +36,8 @@ MatChipsModule,
  MatProgressSpinnerModule,
   MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule
 
     // other modules
   ],

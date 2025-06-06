@@ -10,3 +10,11 @@ export interface Movie {
   original_title: string;
 
 }
+
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  token: string;
+  // add other personalization fields as needed
+}
