@@ -1,11 +1,9 @@
-<mat-card class="movie-card">
-  <!-- Updated image handling -->
+<mat-card class="movie-card" (click)="onCardClick()">
   <img mat-card-image 
        [src]="getPosterUrl()" 
        [alt]="movie.title"
        loading="lazy">
 
-  <!-- Rest of your template remains the same -->
   <mat-card-header>
     <mat-card-title>{{ movie.title || 'Untitled' }}</mat-card-title>
     <mat-card-subtitle>
@@ -13,14 +11,38 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content>
-    <p>{{ movie.overview || 'No description available' }}</p>
-    <mat-chip-listbox aria-label="Movie genres">
-      <mat-chip-option *ngFor="let genre of movie.genre_ids" [selectable]="false">
-        {{ getGenreName(genre) }}
-      </mat-chip-option>
-    </mat-chip-listbox>
-  </mat-card-content>
+ <mat-card-content>
+ <p>
+  {{
+    isExpanded
+      ? movie.overview || 'No description available'
+      : (movie.overview ? movie.overview.slice(0, 50) + (movie.overview.length > 50 ? '...' : '') : 'No description available')
+  }}
+</p>
+
+<a *ngIf="movie.overview && movie.overview.length > 150"
+   (click)="toggleOverview($event)"
+   class="toggle-link">
+  {{ isExpanded ? 'less' : 'read more' }}
+</a>
+
+  <mat-chip-listbox aria-label="Movie genres">
+  <mat-chip-option
+    *ngFor="let genre of getDisplayedGenres()"
+    [selectable]="false">
+    {{ getGenreName(genre) }}
+  </mat-chip-option>
+
+  <mat-chip-option
+    *ngIf="hasMoreGenres() && !isGenresExpanded"
+    class="more-chip"
+    [selectable]="false"
+    (click)="toggleGenres()">
+    ...
+  </mat-chip-option>
+</mat-chip-listbox>
+</mat-card-content>
+
 
   <mat-card-actions>
     <button mat-icon-button color="primary" aria-label="Play movie">

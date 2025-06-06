@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../../../../firebase.init';
+import { Component, Input, OnInit } from '@angular/core';
+import { Movie } from '../../../../models/movie.model';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
-   styleUrls: ['./movie-detail.component.css']
+  styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-  movie: any;
+  @Input() movieId!: number; 
 
-  constructor(private route: ActivatedRoute) {}
+  movie?: Movie;
 
-  async ngOnInit() {
-    const movieId = this.route.snapshot.paramMap.get('id');
-    if (movieId) {
-      const docRef = doc(db, 'movies', movieId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        this.movie = docSnap.data();
-      }
+  constructor(private movieService: MovieService) {}
+
+  ngOnInit(): void {
+    if (this.movieId) {
+      this.movieService.getMovieDetails(this.movieId).subscribe(data => {
+        this.movie = data;
+      });
     }
   }
 }

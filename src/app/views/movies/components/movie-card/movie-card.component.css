@@ -19,3 +19,12 @@
 mat-chip-option {
   margin: 2px;
 }
+
+.toggle-link {
+  color: #1976d2;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: 5px;
+  text-decoration: underline;
+}

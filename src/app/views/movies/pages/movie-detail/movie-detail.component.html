@@ -1,14 +1,15 @@
-<!-- src/app/views/movie/movie-detail.component.html -->
-<div *ngIf="movie; else loading">
+<div *ngIf="movie; else loading" class="animated">
   <h2>{{ movie.title }}</h2>
-  <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
-  <p><strong>Rating:</strong> {{ movie.vote_average }}/10</p>
-  <p><strong>Overview:</strong> {{ movie.overview }}</p>
 
-  <img *ngIf="movie.poster_path"
-       [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-       alt="{{ movie.title }} poster"
-       class="movie-poster" />
+
+  <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+    alt="{{ movie.title }} poster" class="movie-poster" />
+  <div class="p-space">
+    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    <p><strong>Rating:</strong> {{ movie.vote_average }}/10</p>
+    <p><strong>Overview:</strong> {{ movie.overview }}</p>
+  </div>
+
 </div>
 
 <ng-template #loading>

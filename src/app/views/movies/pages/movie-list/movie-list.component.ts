@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../../../models/movie.model';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MovieDetailDialogWrapperComponent } from '../../components/movie-detail-dialog-wrapper/movie-detail-dialog-wrapper.component';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,26 +14,22 @@ export class MovieListComponent implements OnInit {
   totalResults$ = this.movieService.totalResults$;
   isLoading$ = this.movieService.isLoading$;
 
-  currentQuery = this.movieService.currentQuery;
   currentPage = 1;
   query = '';
-  page = 1;
+  heroBackgroundUrl = '';
 
-  heroBackgroundUrl: string | null = null;
-
-  constructor(public movieService: MovieService) {}
+  constructor(
+    public movieService: MovieService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.movieService.movies$.subscribe(movies => {
-      const firstMovie = movies[0];
-      if (firstMovie?.backdrop_path) {
-        this.heroBackgroundUrl = `https://image.tmdb.org/t/p/original${firstMovie.backdrop_path}`;
-      } else {
-        this.heroBackgroundUrl = null;
+    this.movieService.fetchMovies(this.query, this.currentPage);
+    this.movies$.subscribe(movies => {
+      if (movies.length) {
+        this.heroBackgroundUrl = 'https://image.tmdb.org/t/p/original' + movies[0].backdrop_path;
       }
     });
-
-    this.movieService.fetchMovies(this.query, this.page);
   }
 
   onSearch(query: string): void {
@@ -46,8 +43,13 @@ export class MovieListComponent implements OnInit {
     this.movieService.fetchMovies(this.query, this.currentPage);
   }
 
-  clearSearch(): void {
-    this.currentPage = 1;
-    this.movieService.fetchMovies('', 1);
+  openMovieDetail(movieId: number): void {
+    this.dialog.open(MovieDetailDialogWrapperComponent, {
+      width: '70%',
+      data: movieId,
+      panelClass: 'custom-dialog-panel', 
+    maxHeight: '90vh', 
+    autoFocus: false
+    });
   }
 }

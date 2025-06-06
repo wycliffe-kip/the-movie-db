@@ -20,9 +20,16 @@ import { NavigationComponent } from './pages/navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FooterComponent } from './pages/footer/footer.component';
 import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { MovieDetailDialogWrapperComponent } from './components/movie-detail-dialog-wrapper/movie-detail-dialog-wrapper.component';
 
 @NgModule({
-  declarations: [MovieListComponent, MovieCardComponent, SearchBarComponent, PageLayoutComponent, NavigationComponent, FooterComponent,MovieDetailComponent],
+  declarations: [MovieListComponent, MovieCardComponent, 
+    SearchBarComponent, PageLayoutComponent, NavigationComponent, 
+    FooterComponent,MovieDetailComponent,
+    MovieDetailDialogWrapperComponent, 
+  ],
   imports: [
     CommonModule,
     MatPaginatorModule,
@@ -37,11 +44,11 @@ MatChipsModule,
   MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatToolbarModule
-
-    // other modules
+    MatToolbarModule,
+     MatDialogModule,
+    HttpClientModule,
   ],
-   exports: [
+   exports: [ MovieDetailComponent
   ],
 })
 export class MoviesModule {}

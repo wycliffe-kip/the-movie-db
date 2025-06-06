@@ -23,8 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 
 // Firebase Modular SDK initialized in firebase.init.ts
-import '../firebase.init'; // Make sure this file calls initializeApp()
-
+import '../firebase.init';
 @NgModule({
   declarations: [
     AppComponent,
