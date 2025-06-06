@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* styles.css or styles.scss */
+.custom-dialog-panel {
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  max-width: 100%;
+}
+
+.mat-dialog-container {
+  padding: 0 !important; /* remove default padding if needed */
+}

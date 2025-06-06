@@ -1,0 +1,13 @@
+.main-container {
+  padding: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
