@@ -3,7 +3,7 @@ export const environment = {
   production: false,
   tmdbApiKey: '3bd16983e5aee255270cc3a9636904f3',
     firebase: {
-    apiKey: "",
+    apiKey: "AIzaSyBystWPDu9ybVZJAVkvhZVp07cRKcKd0og",
   authDomain: "the-movie-db-f0248.firebaseapp.com",
   projectId: "the-movie-db-f0248",
   storageBucket: "the-movie-db-f0248.firebasestorage.app",

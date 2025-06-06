@@ -54,4 +54,9 @@ fetchMovies(query: string = '', page: number = 1): void {
     const url = `${this.BASE_URL}/movie/${id}?api_key=${this.API_KEY}&append_to_response=credits`;
     return this.http.get<Movie>(url);
   }
+
+getLatestMovie(): Observable<Movie> {
+  const url = `${this.BASE_URL}/movie/latest?api_key=${this.API_KEY}`;
+  return this.http.get<Movie>(url);
+}
 }

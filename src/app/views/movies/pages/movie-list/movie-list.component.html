@@ -1,5 +1,10 @@
+<!-- <app-search-bar
+  [isLoading]="(isLoading$ | async) ?? false"
+  (search)="onSearch($event)">
+</app-search-bar> -->
 <app-search-bar
   [isLoading]="(isLoading$ | async) ?? false"
+  [backgroundImageUrl]="heroBackgroundUrl"
   (search)="onSearch($event)">
 </app-search-bar>
 
