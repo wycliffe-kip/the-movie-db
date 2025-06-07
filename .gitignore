@@ -44,3 +44,4 @@ node_modules/
 node-*.tar.gz
 
 /src/environments/environment.ts
+.vercel
